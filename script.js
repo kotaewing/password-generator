@@ -72,7 +72,6 @@ function generatePassword() {
   }
   console.log('special is ' + special);
   console.log("End of selections");
-  debugger;
   // decide which characters are selected and put them into function array
   if (lower === true) {
     totalChars.push(randomLower, );
@@ -95,6 +94,10 @@ function generatePassword() {
   for (i = 0, text = ''; i < passLength; i++) {
     var charRandom = Math.floor(Math.random() * totalChars.length);
     text += totalChars[charRandom]();
+  }
+
+  if (text === undefined) {
+    debugger;
   }
   // reset the function array to nothing to accept new criteria on consecutive runs
   totalChars = [];
