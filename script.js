@@ -1,20 +1,63 @@
-// Assignment Code
-var generateBtn = document.querySelector("#generate");
+ // Assignment Code
+ var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+ // Write password to the #password input
+ function writePassword() {
+   var password = generatePassword();
+   var passwordText = document.querySelector("#password");
   
-  passwordText.value = password;
+   passwordText.value = password;
+   document.getElementById('password').textContent = passwordText;
 
+ }
+
+ // Add event listener to generate button
+ generateBtn.addEventListener("click", writePassword);
+
+ // begin my code
+
+// lists of characters
+var lowerChars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r','s', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+var upperChars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R','S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+var numericChars = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+var specialChars = ['!', '"', '$', '%', '&', "'", "(", ")", "/"]
+var totalChars = [];
+
+//  Math.random funcitons
+var lowerRandom = Math.floor(Math.random() * lowerChars.length); 
+var upperRandom = Math.floor(Math.random() * upperChars.length);
+var numRandom = Math.floor(Math.random() * numericChars.length);
+var specialRandom = Math.floor(Math.random() * specialChars.length);
+
+// generate random character functions
+function randomLower() {
+  lowerChars[lowerRandom];
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+function randomUpper() {
+  upperChars[upperRandom];
+}
 
-// password criteria
-function characterType() {
+function randomNumber() {
+  numericChars[numRandom];
+}
+
+function randomSpecial() {
+  specialChars[specialRandom];
+}
+
+ // generate password function defined
+function generatePassword() {
+   var lengthPrompt = prompt('How many characters would you like your password to be?  You may choose any length between 8 and 128');
+   var passLength = parseInt(lengthPrompt);
+   if (passLength < 8 || passLength > 128 || isNaN(passLength)) { 
+      alert('Please select a valid option');
+      generatePassword();
+      return;
+  }
+  console.log(passLength);
+  
+  // password criteria
   var lower = confirm('Would you like lowercase characters? Choose OK for yes, or Cancel for no.')
   // validate user selection
   if (lower === true) {
@@ -48,16 +91,28 @@ function characterType() {
   }
   console.log('special is ' + special);
   console.log("End of selections");
-}
 
+  if (lower === true) {
+    totalChars.push(randomLower);
+  }
 
-// generate password function defined
-function generatePassword() {
-  var passLength = prompt('How many characters would you like your password to be?  You may choose any length between 8 and 128');
-  var charType = characterType();
-  var lowerChars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r','s', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-  var upperChars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R','S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-  var numericChars = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  var specialChars = ['!', '"', '$', '%', '&', "'", "(", ")", "/"]
+  if (upper === true) {
+    totalChars.push(randomUpper);
+  }
+
+  if (numeric === true) {
+    totalChars.push(randomNumber);
+  }
+
+  if (special === true) {
+    totalChars.push(randomSpecial);
+  }
+
+  var charRandom = Math.floor(Math.random() * totalChars.length);
+
+  console.log(totalChars[charRandom]);
+  return totalChars[charRandom];
   
 }
+
+
