@@ -24,27 +24,31 @@ var specialChars = ['!', '"', '$', '%', '&', "'", "(", ")", "/"]
 var totalChars = [];
 
 //  Math.random funcitons
-var lowerRandom = Math.floor(Math.random() * lowerChars.length); 
-var upperRandom = Math.floor(Math.random() * upperChars.length);
-var numRandom = Math.floor(Math.random() * numericChars.length);
-var specialRandom = Math.floor(Math.random() * specialChars.length);
+// var lowerRandom = Math.floor(Math.random() * lowerChars.length); 
+// var upperRandom = Math.floor(Math.random() * upperChars.length);
+// var numRandom = Math.floor(Math.random() * numericChars.length);
+// var specialRandom = Math.floor(Math.random() * specialChars.length);
 
 // generate random character functions
 function randomLower() {
-  lowerChars[lowerRandom];
+  return lowerChars[Math.floor(Math.random() * lowerChars.length)].valueOf();
 }
 
 function randomUpper() {
-  upperChars[upperRandom];
+  return upperChars[Math.floor(Math.random() * upperChars.length)].valueOf();
 }
 
 function randomNumber() {
-  numericChars[numRandom];
+  return numericChars[Math.floor(Math.random() * numericChars.length)].valueOf();
 }
 
 function randomSpecial() {
-  specialChars[specialRandom];
+  return specialChars[Math.floor(Math.random() * specialChars.length)].valueOf();
 }
+
+// function finalGenerator() {
+//   return totalChars[charRandom].valueOf()
+// }
 
  // generate password function defined
 function generatePassword() {
@@ -91,27 +95,33 @@ function generatePassword() {
   }
   console.log('special is ' + special);
   console.log("End of selections");
-
+  debugger;
   if (lower === true) {
-    totalChars.push(randomLower);
+    totalChars.push(randomLower, );
   }
 
   if (upper === true) {
-    totalChars.push(randomUpper);
+    totalChars.push(randomUpper, );
   }
 
   if (numeric === true) {
-    totalChars.push(randomNumber);
+    totalChars.push(randomNumber, );
   }
 
   if (special === true) {
     totalChars.push(randomSpecial);
   }
 
-  var charRandom = Math.floor(Math.random() * totalChars.length);
+  // console.log(totalChars[charRandom]());
+  var i, text;
+  for (i = 0, text = ''; i < passLength; i++) {
+    var charRandom = Math.floor(Math.random() * totalChars.length);
+    text += totalChars[charRandom]();
+  }
+  
+  totalChars = [];
 
-  console.log(totalChars[charRandom]);
-  return totalChars[charRandom];
+  return text;
   
 }
 
