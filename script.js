@@ -23,12 +23,6 @@ var numericChars = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 var specialChars = ['!', '"', '$', '%', '&', "'", "(", ")", "/"]
 var totalChars = [];
 
-//  Math.random funcitons
-// var lowerRandom = Math.floor(Math.random() * lowerChars.length); 
-// var upperRandom = Math.floor(Math.random() * upperChars.length);
-// var numRandom = Math.floor(Math.random() * numericChars.length);
-// var specialRandom = Math.floor(Math.random() * specialChars.length);
-
 // generate random character functions
 function randomLower() {
   return lowerChars[Math.floor(Math.random() * lowerChars.length)].valueOf();
@@ -46,14 +40,13 @@ function randomSpecial() {
   return specialChars[Math.floor(Math.random() * specialChars.length)].valueOf();
 }
 
-// function finalGenerator() {
-//   return totalChars[charRandom].valueOf()
-// }
-
  // generate password function defined
 function generatePassword() {
-   var lengthPrompt = prompt('How many characters would you like your password to be?  You may choose any length between 8 and 128');
+  // get password length 
+  var lengthPrompt = prompt('How many characters would you like your password to be?  You may choose any length between 8 and 128');
+  // turn the string into a number
    var passLength = parseInt(lengthPrompt);
+  //  check for inputs outside of range/scope
    if (passLength < 8 || passLength > 128 || isNaN(passLength)) { 
       alert('Please select a valid option');
       generatePassword();
@@ -96,6 +89,7 @@ function generatePassword() {
   console.log('special is ' + special);
   console.log("End of selections");
   debugger;
+  // decide which characters are selected and put them into function array
   if (lower === true) {
     totalChars.push(randomLower, );
   }
@@ -112,15 +106,16 @@ function generatePassword() {
     totalChars.push(randomSpecial);
   }
 
-  // console.log(totalChars[charRandom]());
+//  begin generating password from selected criteria
   var i, text;
   for (i = 0, text = ''; i < passLength; i++) {
     var charRandom = Math.floor(Math.random() * totalChars.length);
     text += totalChars[charRandom]();
   }
-  
+  // reset the function array to nothing to accept new criteria on consecutive runs
   totalChars = [];
 
+  // return the password 
   return text;
   
 }
